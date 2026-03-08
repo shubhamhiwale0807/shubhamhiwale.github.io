@@ -504,7 +504,7 @@ nav{
 .pipeline-canvas-wrap{
   position:relative;
   width:100%;
-  height:clamp(420px,55vw,640px);
+  height:clamp(420px,65vw,520px);
   margin-bottom:40px;
 }
 #pipeline-canvas{
@@ -849,7 +849,7 @@ footer{
    RESPONSIVE — MOBILE
 ═══════════════════════════════════════ */
 @media(max-width:580px){
-  .universe-section{padding:70px 18px}
+  .universe-section{padding:60px 16px}
   .skills-grid,.planets-grid,.about-grid,.snap-grid-v3,.contact-grid-v3{grid-template-columns:1fr}
   .metrics-grid{grid-template-columns:repeat(2,1fr)}
   .hero-content{padding:70px 16px 50px}
@@ -859,7 +859,20 @@ footer{
   .sec-h{font-size:clamp(28px,8vw,42px)}
   .edu-v3{flex-direction:column;text-align:center}
   .brand-v3{margin:0 16px;padding:36px 20px}
-  .pipeline-canvas-wrap{height:300px}
+  .pipeline-canvas-wrap{height:clamp(320px,80vw,420px);}
+  #pipeline-canvas{
+     width:100%;
+     height:100%;
+     display:block;
+  }
+  .node-info-panel{
+    left:12px;
+    right:12px;
+    bottom:12px;
+    padding:12px 14px;
+  }
+  .nip-name{font-size:13px}
+  .nip-desc{font-size:11px}
   .l-rope{height:70px}
   #cursor-dot,#cursor-ring{display:none}
   .id-card-v3{width:clamp(240px,85vw,290px)}
@@ -1072,7 +1085,7 @@ footer{
     <h2 class="sec-h rv3">By The <span>Numbers</span></h2>
     <div class="metrics-grid">
       <div class="metric-card rv3">
-        <div class="metric-num" data-target="3">0</div>
+        <div class="metric-num" data-target="3+">0</div>
         <div class="metric-label">Years Experience</div>
       </div>
       <div class="metric-card rv3">
