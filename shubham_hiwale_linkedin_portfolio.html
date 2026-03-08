@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shubham Hiwale — Data Engineer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #0f2040;
+    --electric: #00c2ff;
+    --electric-dim: #0080aa;
+    --gold: #f5c842;
+    --mint: #00e5b0;
+    --white: #f0f4ff;
+    --muted: #8899bb;
+    --card-bg: rgba(15, 32, 64, 0.8);
+    --border: rgba(0, 194, 255, 0.18);
+    --glow: 0 0 40px rgba(0, 194, 255, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 10% 5%, rgba(0,194,255,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 80%, rgba(0,229,176,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 50% 50%, rgba(245,200,66,0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grid overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,194,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,194,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    background: rgba(10,22,40,0.85);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--electric);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--electric); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 90px 0 70px;
+    position: relative;
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--electric);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 80px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s forwards;
+  }
+
+  .hero-name span {
+    background: linear-gradient(135deg, var(--electric), var(--mint));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-title {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-weight: 400;
+    max-width: 680px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.3s forwards;
+  }
+
+  .hero-title strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s forwards;
+  }
+
+  .badge {
+    background: rgba(0,194,255,0.08);
+    border: 1px solid rgba(0,194,255,0.22);
+    color: var(--electric);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 5px 13px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .badge:hover {
+    background: rgba(0,194,255,0.16);
+    border-color: rgba(0,194,255,0.5);
+    transform: translateY(-2px);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.5s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--electric), var(--mint));
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding: 12px 26px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,194,255,0.3);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-weight: 500;
+    font-size: 13px;
+    padding: 12px 26px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: rgba(0,194,255,0.08);
+    border-color: var(--electric);
+    color: var(--electric);
+  }
+
+  /* ── STAT STRIP ── */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 80px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.6s forwards;
+  }
+
+  .stat-item {
+    background: var(--card-bg);
+    padding: 24px 20px;
+    text-align: center;
+    transition: background 0.2s;
+  }
+
+  .stat-item:hover { background: rgba(0,194,255,0.08); }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--electric), var(--mint));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ── SECTIONS ── */
+  section { margin-bottom: 80px; }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--electric);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-tag::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--electric);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 700;
+    margin-bottom: 36px;
+    line-height: 1.2;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .about-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .about-card:hover {
+    border-color: rgba(0,194,255,0.35);
+    box-shadow: var(--glow);
+  }
+
+  .about-card.full { grid-column: 1 / -1; }
+
+  .about-card h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--electric);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .about-text {
+    color: #b8ccee;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .skill-category {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .skill-category:hover {
+    border-color: rgba(0,194,255,0.35);
+    transform: translateY(-3px);
+  }
+
+  .skill-cat-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-cat-title .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .skill-tag {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #c8daf5;
+    font-size: 12px;
+    padding: 4px 11px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .skill-tag:hover {
+    background: rgba(0,194,255,0.1);
+    border-color: rgba(0,194,255,0.3);
+    color: var(--electric);
+  }
+
+  /* ── EXPERIENCE ── */
+  .timeline { position: relative; padding-left: 30px; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--electric), var(--mint), transparent);
+  }
+
+  .exp-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    left: -37px;
+    top: 28px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--electric);
+    border: 3px solid var(--navy);
+    box-shadow: 0 0 12px rgba(0,194,255,0.6);
+  }
+
+  .exp-card:hover {
+    border-color: rgba(0,194,255,0.35);
+    box-shadow: var(--glow);
+  }
+
+  .exp-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .exp-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .exp-role {
+    font-size: 14px;
+    color: var(--electric);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .exp-meta {
+    text-align: right;
+  }
+
+  .exp-duration {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--mint);
+    margin-bottom: 4px;
+  }
+
+  .exp-location {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .exp-bullets li {
+    display: flex;
+    gap: 12px;
+    color: #b8ccee;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .exp-bullets li::before {
+    content: '▸';
+    color: var(--electric);
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .exp-bullets li strong { color: var(--white); }
+
+  .tech-used {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+
+  .tech-chip {
+    background: rgba(0,229,176,0.07);
+    border: 1px solid rgba(0,229,176,0.2);
+    color: var(--mint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--electric), var(--mint));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .project-card:hover {
+    border-color: rgba(0,194,255,0.35);
+    box-shadow: var(--glow);
+    transform: translateY(-4px);
+  }
+
+  .project-card:hover::after { transform: scaleX(1); }
+
+  .project-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+  }
+
+  .project-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+
+  .project-desc {
+    font-size: 13px;
+    color: #8899bb;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .project-impact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+
+  .project-impact::before {
+    content: '⚡';
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .project-tech span {
+    background: rgba(245,200,66,0.07);
+    border: 1px solid rgba(245,200,66,0.2);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  /* ── EXPERTISE SNAPSHOT ── */
+  .snapshot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .snapshot-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s;
+  }
+
+  .snapshot-item:hover {
+    border-color: rgba(0,194,255,0.35);
+    background: rgba(0,194,255,0.06);
+    transform: translateX(4px);
+  }
+
+  .snapshot-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(0,194,255,0.15), rgba(0,229,176,0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .snapshot-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: #c8daf5;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    transition: all 0.2s;
+  }
+
+  .edu-card:hover {
+    border-color: rgba(0,194,255,0.35);
+    box-shadow: var(--glow);
+  }
+
+  .edu-icon {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(245,200,66,0.15), rgba(0,194,255,0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    border: 1px solid rgba(245,200,66,0.2);
+  }
+
+  .edu-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .edu-field {
+    font-size: 14px;
+    color: var(--electric);
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  .edu-school {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .edu-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--mint);
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .contact-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .contact-card:hover {
+    border-color: rgba(0,194,255,0.4);
+    background: rgba(0,194,255,0.07);
+    transform: translateY(-3px);
+    box-shadow: var(--glow);
+  }
+
+  .contact-icon { font-size: 24px; margin-bottom: 8px; }
+
+  .contact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .contact-value {
+    font-size: 13px;
+    color: var(--white);
+    font-weight: 500;
+    word-break: break-all;
+  }
+
+  /* ── BRAND STATEMENT ── */
+  .brand-statement {
+    background: linear-gradient(135deg, rgba(0,194,255,0.06), rgba(0,229,176,0.06));
+    border: 1px solid rgba(0,194,255,0.2);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .brand-statement::before {
+    content: '"';
+    position: absolute;
+    top: -10px; left: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 140px;
+    color: rgba(0,194,255,0.06);
+    line-height: 1;
+    user-select: none;
+  }
+
+  .brand-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(17px, 2.5vw, 22px);
+    font-weight: 400;
+    font-style: italic;
+    color: #c8daf5;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .brand-sig {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--electric);
+    letter-spacing: 2px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 30px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── HEADLINE BADGE ── */
+  .headline-card {
+    background: linear-gradient(135deg, rgba(0,194,255,0.07), rgba(0,229,176,0.05));
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    backdrop-filter: blur(10px);
+    margin-bottom: 80px;
+  }
+
+  .headline-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .headline-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.8;
+  }
+
+  .headline-text .hl {
+    color: var(--electric);
+    font-weight: 600;
+  }
+
+  /* Responsive */
+  @media (max-width: 680px) {
+    .about-grid, .skills-grid, .projects-grid, .snapshot-grid, .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .exp-header { flex-direction: column; }
+    .exp-meta { text-align: left; }
+    .edu-card { flex-direction: column; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">SH · Portfolio</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="container">
+  <section class="hero">
+    <div class="hero-label">Data Engineer · Available for Opportunities</div>
+    <h1 class="hero-name">Shubham<br><span>Hiwale</span></h1>
+    <p class="hero-title">
+      <strong>Senior Data Engineer</strong> · Building scalable data pipelines, cloud architectures,
+      and intelligent ETL systems that power data-driven businesses.
+    </p>
+    <div class="hero-badges">
+      <span class="badge">Python</span>
+      <span class="badge">PySpark</span>
+      <span class="badge">AWS Glue</span>
+      <span class="badge">Apache Spark</span>
+      <span class="badge">Airflow</span>
+      <span class="badge">Snowflake</span>
+      <span class="badge">PostgreSQL</span>
+      <span class="badge">Redshift</span>
+      <span class="badge">Elasticsearch</span>
+      <span class="badge">n8n</span>
+      <span class="badge">Prompt Engineering</span>
+      <span class="badge">Linux</span>
+    </div>
+    <div class="hero-cta">
+      <a href="mailto:shubhamhiwale0807@gmail.com" class="btn-primary">✉ Get in Touch</a>
+      <a href="https://www.linkedin.com/in/shubhamhiwale-6a3688193" target="_blank" class="btn-outline">🔗 LinkedIn Profile</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip reveal">
+    <div class="stat-item">
+      <div class="stat-number">3+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">40%</div>
+      <div class="stat-label">Faster Campaigns</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Companies</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">15+</div>
+      <div class="stat-label">Technologies</div>
+    </div>
+  </div>
+
+  <!-- HEADLINE -->
+  <section class="reveal" id="headline">
+    <div class="section-tag">LinkedIn Headline</div>
+    <div class="headline-card">
+      <div class="headline-label">🔖 Professional Headline</div>
+      <div class="headline-text">
+        <span class="hl">Data Engineer</span> | 
+        <span class="hl">Python</span> | 
+        <span class="hl">PySpark</span> | 
+        <span class="hl">AWS Glue</span> | 
+        <span class="hl">Apache Spark</span> | 
+        <span class="hl">Airflow</span> | 
+        ETL Pipelines | 
+        <span class="hl">Snowflake</span> | 
+        <span class="hl">Redshift</span> | 
+        Cloud Data Engineering | 
+        <span class="hl">Elasticsearch</span> | 
+        Big Data | 
+        Prompt Engineering
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <div class="section-tag">About</div>
+    <h2 class="section-title">Professional Summary</h2>
+    <div class="about-grid">
+      <div class="about-card full">
+        <h4>About Me</h4>
+        <p class="about-text">
+          Results-driven <strong>Data Engineer with 3+ years</strong> of specialized experience designing and delivering 
+          high-performance, cloud-native data infrastructure for enterprise clients. I architect end-to-end ETL pipelines, 
+          large-scale data migration systems, and intelligent customer analytics platforms that transform raw data into 
+          actionable business intelligence.
+        </p>
+        <br>
+        <p class="about-text">
+          My core expertise spans <strong>AWS cloud services</strong> (Glue, Redshift, S3, DMS), <strong>Apache Spark & PySpark</strong> 
+          for distributed data processing, and modern data warehousing solutions including <strong>Snowflake</strong>. 
+          I have a proven track record of <strong>reducing operational overhead by 40%</strong> through intelligent pipeline 
+          automation and have successfully led on-premises-to-cloud migrations that enhance both data accessibility and system resilience.
+        </p>
+        <br>
+        <p class="about-text">
+          I thrive at the intersection of data engineering and business value — bridging technical complexity with 
+          tangible outcomes. Whether building <strong>customer segmentation engines</strong> for marketing teams, 
+          automating campaign data workflows, or integrating real-time Elasticsearch pipelines, I consistently deliver 
+          scalable, maintainable, and high-quality data solutions. Currently exploring <strong>AI-augmented data workflows</strong> 
+          with Prompt Engineering and n8n automation.
+        </p>
+      </div>
+      <div class="about-card">
+        <h4>Location</h4>
+        <p class="about-text">📍 Gurugram, Haryana, India<br>
+        <span style="color:var(--muted);font-size:13px;">Open to Remote & Hybrid</span></p>
+      </div>
+      <div class="about-card">
+        <h4>Career Focus</h4>
+        <p class="about-text">Scalable data platforms · Cloud migrations · Real-time pipelines · AI-driven automation</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="reveal">
+    <div class="section-tag">Skills</div>
+    <h2 class="section-title">Core Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-cat-title"><span class="dot"></span> Programming</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Shell Script</span>
+          <span class="skill-tag">PySpark</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title"><span class="dot"></span> Cloud Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS Glue</span>
+          <span class="skill-tag">Amazon Redshift</span>
+          <span class="skill-tag">Amazon S3</span>
+          <span class="skill-tag">AWS DMS</span>
+          <span class="skill-tag">Snowflake</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title"><span class="dot"></span> Big Data Technologies</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Apache Spark</span>
+          <span class="skill-tag">HDFS</span>
+          <span class="skill-tag">Sqoop</span>
+          <span class="skill-tag">Elasticsearch</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title"><span class="dot"></span> Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">Oracle</span>
+          <span class="skill-tag">Snowflake DW</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title"><span class="dot"></span> Data Engineering</div>
+        <div class="skill-tags">
+          <span class="skill-tag">ETL Pipeline Design</span>
+          <span class="skill-tag">Data Migration</span>
+          <span class="skill-tag">Data Warehousing</span>
+          <span class="skill-tag">Data Modeling</span>
+          <span class="skill-tag">FTP</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title"><span class="dot"></span> Automation & AI Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Apache Airflow</span>
+          <span class="skill-tag">n8n</span>
+          <span class="skill-tag">Prompt Engineering</span>
+          <span class="skill-tag">Google Gemini</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">MS Excel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="reveal">
+    <div class="section-tag">Experience</div>
+    <h2 class="section-title">Professional Experience</h2>
+    <div class="timeline">
+
+      <!-- Job 1 -->
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Easyrewardz Software Services</div>
+            <div class="exp-role">Data Engineer</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-duration">Dec 2024 – Present · 1 yr 4 mo</div>
+            <div class="exp-location">📍 Gurugram, Haryana, India</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li><strong>Architected a customer segmentation platform</strong> that dynamically creates audience segments based on client-defined behavioral tags, enabling highly targeted marketing campaigns at scale.</li>
+          <li>Engineered <strong>high-throughput data pipelines</strong> using Python, Apache Spark, PostgreSQL, and Elasticsearch — ensuring end-to-end data integrity, fault tolerance, and sub-second query performance.</li>
+          <li>Designed and deployed a <strong>production-grade AWS Glue ETL pipeline</strong> that extracts, transforms, and loads data from S3 buckets, streamlining data availability for BI reporting and analytics teams.</li>
+          <li><strong>Automated the end-to-end customer segment creation workflow</strong>, eliminating manual intervention and reducing campaign preparation time by <strong>40%</strong>, directly accelerating go-to-market timelines.</li>
+          <li>Collaborated across engineering, product, and marketing teams to translate complex business requirements into reliable data architecture solutions.</li>
+        </ul>
+        <div class="tech-used">
+          <span class="tech-chip">Python</span>
+          <span class="tech-chip">Apache Spark</span>
+          <span class="tech-chip">AWS Glue</span>
+          <span class="tech-chip">Amazon S3</span>
+          <span class="tech-chip">PostgreSQL</span>
+          <span class="tech-chip">Elasticsearch</span>
+        </div>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Helson Software Solutions</div>
+            <div class="exp-role">Data Engineer</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-duration">Aug 2022 – Nov 2024 · 2 yrs 4 mo</div>
+            <div class="exp-location">📍 Hyderabad, Telangana, India</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed and implemented <strong>AWS Glue-based ETL pipelines</strong> for large-scale data migration from on-premises infrastructure to cloud platforms (AWS and Snowflake), significantly improving data accessibility, scalability, and query performance.</li>
+          <li>Managed <strong>complex data ingestion and integration workflows</strong> using AWS Database Migration Service (DMS) and PySpark, ensuring schema consistency, data quality validation, and seamless cross-system transformations.</li>
+          <li>Collaborated with cross-functional business and analytics teams to <strong>gather data requirements</strong> and translate them into production-ready data engineering solutions powering business intelligence dashboards.</li>
+          <li>Contributed to <strong>data warehouse modernization efforts</strong> by migrating legacy on-premises SQL workloads to cloud-native Snowflake, reducing infrastructure cost and improving pipeline reliability.</li>
+          <li>Developed <strong>reusable PySpark transformation modules</strong> that standardized data handling across multiple client projects, reducing development time for new pipeline features.</li>
+        </ul>
+        <div class="tech-used">
+          <span class="tech-chip">PySpark</span>
+          <span class="tech-chip">AWS Glue</span>
+          <span class="tech-chip">AWS DMS</span>
+          <span class="tech-chip">Snowflake</span>
+          <span class="tech-chip">Amazon Redshift</span>
+          <span class="tech-chip">SQL</span>
+          <span class="tech-chip">HDFS</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="reveal">
+    <div class="section-tag">Projects</div>
+    <h2 class="section-title">Highlighted Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">🎯</div>
+        <div class="project-name">Customer Segmentation Engine</div>
+        <div class="project-desc">Architected a dynamic audience segmentation platform that processes client behavioral data in real-time, creating precise customer segments for targeted campaign delivery.</div>
+        <div class="project-impact">Reduced campaign prep time by 40%</div>
+        <div class="project-tech">
+          <span>Python</span><span>Spark</span><span>PostgreSQL</span><span>Elasticsearch</span><span>AWS</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">⚙️</div>
+        <div class="project-name">AWS Glue ETL Automation</div>
+        <div class="project-desc">Built an automated ETL pipeline on AWS Glue that extracts raw data from S3, applies multi-stage transformations, and loads processed data for downstream BI consumption.</div>
+        <div class="project-impact">Eliminated manual data prep workflows</div>
+        <div class="project-tech">
+          <span>AWS Glue</span><span>S3</span><span>Python</span><span>SQL</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">☁️</div>
+        <div class="project-name">On-Premises to Cloud Migration</div>
+        <div class="project-desc">Led end-to-end migration of enterprise data infrastructure from on-premises SQL systems to cloud-native Snowflake and AWS, improving scalability and reducing infrastructure costs.</div>
+        <div class="project-impact">Modernized legacy data infrastructure</div>
+        <div class="project-tech">
+          <span>Snowflake</span><span>AWS DMS</span><span>PySpark</span><span>Redshift</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🤖</div>
+        <div class="project-name">AI-Augmented Data Workflows</div>
+        <div class="project-desc">Exploring intelligent workflow automation using Prompt Engineering, Google Gemini, and n8n to build self-optimizing data pipelines and AI-assisted data quality monitoring systems.</div>
+        <div class="project-impact">Next-gen AI-driven data ops</div>
+        <div class="project-tech">
+          <span>Prompt Engineering</span><span>n8n</span><span>Google Gemini</span><span>Python</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERTISE SNAPSHOT -->
+  <section class="reveal">
+    <div class="section-tag">Snapshot</div>
+    <h2 class="section-title">Technical Expertise Snapshot</h2>
+    <div class="snapshot-grid">
+      <div class="snapshot-item">
+        <div class="snapshot-icon">🏗️</div>
+        <div class="snapshot-text">Data Pipeline Architecture</div>
+      </div>
+      <div class="snapshot-item">
+        <div class="snapshot-icon">☁️</div>
+        <div class="snapshot-text">Cloud Data Platforms (AWS, Snowflake)</div>
+      </div>
+      <div class="snapshot-item">
+        <div class="snapshot-icon">⚡</div>
+        <div class="snapshot-text">Large-Scale Distributed Processing</div>
+      </div>
+      <div class="snapshot-item">
+        <div class="snapshot-icon">👥</div>
+        <div class="snapshot-text">Customer Analytics Systems</div>
+      </div>
+      <div class="snapshot-item">
+        <div class="snapshot-icon">🔄</div>
+        <div class="snapshot-text">Workflow Automation & Orchestration</div>
+      </div>
+      <div class="snapshot-item">
+        <div class="snapshot-icon">🚀</div>
+        <div class="snapshot-text">On-Prem to Cloud Migration</div>
+      </div>
+      <div class="snapshot-item">
+        <div class="snapshot-icon">🤖</div>
+        <div class="snapshot-text">AI-Augmented Data Engineering</div>
+      </div>
+      <div class="snapshot-item">
+        <div class="snapshot-icon">🔍</div>
+        <div class="snapshot-text">Real-Time Search & Elasticsearch</div>
+      </div>
+      <div class="snapshot-item">
+        <div class="snapshot-icon">📊</div>
+        <div class="snapshot-text">Data Warehousing & ETL Design</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="reveal">
+    <div class="section-tag">Education</div>
+    <h2 class="section-title">Academic Background</h2>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Bachelor of Engineering (B.E.)</div>
+        <div class="edu-field">Information Technology</div>
+        <div class="edu-school">Dr. D.Y. Patil College of Engineering, Pune</div>
+        <div class="edu-year">Aug 2017 – May 2022</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="reveal">
+    <div class="section-tag">Contact</div>
+    <h2 class="section-title">Professional Links</h2>
+    <div class="contact-grid">
+      <a href="mailto:shubhamhiwale0807@gmail.com" class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">shubhamhiwale0807@gmail.com</div>
+      </a>
+      <a href="https://www.linkedin.com/in/shubhamhiwale-6a3688193" target="_blank" class="contact-card">
+        <div class="contact-icon">🔗</div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">linkedin.com/in/shubhamhiwale</div>
+      </a>
+      <a href="tel:+917058942695" class="contact-card">
+        <div class="contact-icon">📱</div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-value">+91 7058942695</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- BRAND STATEMENT -->
+  <section class="reveal">
+    <div class="brand-statement">
+      <p class="brand-quote">
+        "I build the invisible infrastructure that turns messy, siloed data into clean, 
+        connected intelligence — engineering pipelines that scale with ambition, migrate with precision, 
+        and deliver the insights that drive decisions worth making."
+      </p>
+      <div class="brand-sig">— Shubham Hiwale · Data Engineer</div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Shubham Hiwale · Data Engineer · Gurugram, India · Built with precision</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Stagger child animations inside reveal sections
+  document.querySelectorAll('.skills-grid .skill-category, .projects-grid .project-card, .snapshot-grid .snapshot-item, .stats-strip .stat-item').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.07) + 's';
+  });
+</script>
+</body>
+</html>
