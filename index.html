@@ -110,94 +110,223 @@
       transform: translateY(-2px);
     }
 
-    /* Hero Labels */
-    #hero-content {
-      position: fixed;
-      top: 50%;
-      left: 10%;
-      transform: translateY(-50%);
-      z-index: 5;
-      pointer-events: none;
-      opacity: 0;
+    /* ═══════════════════════════════════════
+       USER DATA PREMIUM STYLES
+       ═══════════════════════════════════════ */
+    .hero-tech-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
     }
 
-    .hero-name {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 5rem;
-      font-weight: 900;
-      line-height: 1;
-      margin-bottom: 10px;
-      background: linear-gradient(to bottom, #fff, var(--electric));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-title {
-      font-size: 1.5rem;
-      color: var(--mint);
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .hero-tech {
+    .htag {
       font-family: 'JetBrains Mono', monospace;
-      color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 10px;
+      letter-spacing: 1px;
+      background: rgba(0, 212, 255, 0.06);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      color: var(--electric);
+      padding: 5px 12px;
+      border-radius: 4px;
+      text-transform: uppercase;
     }
 
-    /* Loading Screen */
-    #loader {
-      position: fixed;
-      inset: 0;
-      background: var(--void);
-      z-index: 100;
+    /* ID CARD V3 */
+    .lanyard-system {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      transform-origin: top center;
     }
 
-    .loader-bar {
-      width: 200px;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.1);
-      margin-top: 20px;
-      position: relative;
+    .l-pin {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--void);
+      border: 2px solid var(--electric);
+      box-shadow: 0 0 16px var(--electric);
+    }
+
+    .l-rope {
+      width: 2px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--electric), rgba(0, 212, 255, 0.2));
+    }
+
+    .id-card-v3 {
+      width: 300px;
+      background: linear-gradient(165deg, rgba(8, 24, 52, 0.97), rgba(3, 10, 28, 0.99));
+      border: 1px solid rgba(0, 212, 255, 0.22);
+      border-radius: 20px;
       overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+      position: relative;
+      animation: cardSway 6s ease-in-out infinite;
+      transform-origin: top center;
     }
 
-    .loader-progress {
-      position: absolute;
-      left: 0;
-      top: 0;
+    @keyframes cardSway {
+      0% {
+        transform: rotate(-2deg);
+      }
+
+      50% {
+        transform: rotate(2deg);
+      }
+
+      100% {
+        transform: rotate(-2deg);
+      }
+    }
+
+    .v3-stripe {
+      height: 8px;
+      background: linear-gradient(90deg, var(--electric), var(--mint), var(--gold), var(--pink), var(--electric));
+      background-size: 400% 100%;
+      animation: stripeAnim 4s linear infinite;
+    }
+
+    @keyframes stripeAnim {
+      from {
+        background-position: 0%;
+      }
+
+      to {
+        background-position: 400%;
+      }
+    }
+
+    .v3-head {
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8px;
+      color: var(--electric);
+      font-family: 'JetBrains Mono';
+    }
+
+    .v3-photo-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .v3-ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      padding: 3px;
+      background: conic-gradient(var(--electric), var(--mint), var(--gold), var(--pink));
+      animation: ringRotate 5s linear infinite;
+    }
+
+    @keyframes ringRotate {
+      from {
+        filter: hue-rotate(0deg);
+      }
+
+      to {
+        filter: hue-rotate(360deg);
+      }
+    }
+
+    .v3-photo-inner {
+      width: 100%;
       height: 100%;
-      width: 0%;
-      background: var(--electric);
-      box-shadow: 0 0 10px var(--electric);
-      transition: width 0.3s ease;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--void);
     }
 
-    /* Section Containers (Hidden in 3D universe until triggered) */
-    .section-panel {
-      position: fixed;
-      right: 10%;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 450px;
-      background: rgba(4, 13, 33, 0.85);
-      border-left: 2px solid var(--electric);
-      padding: 40px;
-      backdrop-filter: blur(20px);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 15;
+    .v3-photo-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .section-panel.active {
-      opacity: 1;
-      pointer-events: all;
+    .v3-body {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .v3-name {
+      font-family: 'Orbitron';
+      font-weight: 900;
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+
+    .v3-role {
+      font-size: 9px;
+      color: var(--electric);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Terminal Wrap */
+    .terminal-wrap {
+      background: rgba(2, 8, 20, 0.96);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 20px;
+    }
+
+    .term-header {
+      background: rgba(4, 15, 40, 0.8);
+      padding: 8px 15px;
+      display: flex;
+      gap: 5px;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+    }
+
+    .term-btn {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .term-body {
+      padding: 15px;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .t-prompt {
+      color: var(--mint);
+    }
+
+    /* Metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .metric-card {
+      background: rgba(0, 212, 255, 0.05);
+      border: 1px solid rgba(0, 212, 255, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .metric-num {
+      font-family: 'Orbitron';
+      font-size: 1.2rem;
+      color: var(--electric);
+      display: block;
+    }
+
+    .metric-label {
+      font-size: 8px;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
     @media (max-width: 768px) {
@@ -254,16 +383,50 @@
 
   <div id="hero-content">
     <h1 class="hero-name">SHUBHAM<br>HIWALE</h1>
-    <div class="hero-title">Data Engineer</div>
-    <div class="hero-tech">Python • PySpark • AWS Glue • Snowflake • Spark • SQL</div>
+    <div class="hero-title">Senior Data Engineer</div>
+    <div class="hero-tech-strip">
+      <span class="htag">Python</span><span class="htag">PySpark</span>
+      <span class="htag">AWS Glue</span><span class="htag">Spark</span>
+      <span class="htag">Airflow</span><span class="htag">Snowflake</span>
+      <span class="htag">PostgreSQL</span><span class="htag">Redshift</span>
+    </div>
   </div>
 
   <!-- Info Panels -->
   <div id="about-panel" class="section-panel">
     <div class="hero-tech">SECTOR: BIOGRAPHY</div>
-    <h2 class="hero-title">Shubham Hiwale</h2>
-    <p>Data Engineering Architect specializing in building massive-scale automated data pipelines. Expert in
-      transforming raw chaos into structured intelligence using modern cloud stacks.</p>
+    <div class="lanyard-system">
+      <div class="l-pin"></div>
+      <div class="l-rope"></div>
+      <div class="id-card-v3">
+        <div class="v3-stripe"></div>
+        <div class="v3-head">
+          <span>DATA ENGINEER ID</span>
+          <span>#SH-2025-DE</span>
+        </div>
+        <div class="v3-photo-wrap">
+          <div class="v3-ring">
+            <div class="v3-photo-inner">
+              <img src="https://via.placeholder.com/150" alt="Profile">
+            </div>
+          </div>
+        </div>
+        <div class="v3-body">
+          <h3 class="v3-name">Shubham Hiwale</h3>
+          <p class="v3-role">Senior Data Engineer</p>
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <span class="metric-num">500TB</span>
+              <span class="metric-label">Data Managed</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-num">99.9%</span>
+              <span class="metric-label">Pipeline Uptime</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="skills-panel" class="section-panel">
@@ -294,9 +457,21 @@
   <div id="projects-panel" class="section-panel">
     <div class="hero-tech">SECTOR: DEPLOYMENTS</div>
     <h2 class="hero-title">Mission Logs</h2>
-    <p>1. <b>Omni-Data Lake:</b> Migrated 500TB of legacy data to AWS S3 + Snowflake.</p>
-    <p>2. <b>Real-time Analytics:</b> Built a PySpark streaming engine for fraud detection.</p>
-    <p>3. <b>Auto-QC:</b> Automated data quality checks reducing errors by 70%.</p>
+    <div class="terminal-wrap">
+      <div class="term-header">
+        <div class="term-btn" style="background: #ff4d4d;"></div>
+        <div class="term-btn" style="background: #ffd060;"></div>
+        <div class="term-btn" style="background: #00ff88;"></div>
+      </div>
+      <div class="term-body">
+        <div class="t-line"><span class="t-prompt">$</span> cat mission_01.log</div>
+        <div class="t-line">Migrated 500TB legacy data to AWS S3 + Snowflake. Optimized clusters by 40%.</div>
+        <div class="t-line"><span class="t-prompt">$</span> cat mission_02.log</div>
+        <div class="t-line">Built PySpark streaming engine for real-time fraud detection.</div>
+        <div class="t-line"><span class="t-prompt">$</span> cat mission_03.log</div>
+        <div class="t-line">Deployed Auto-QC framework. Error reduction: 70%. Status: STABLE.</div>
+      </div>
+    </div>
   </div>
 
   <div id="contact-panel" class="section-panel">
@@ -758,6 +933,7 @@
       revealHero() {
         gsap.to('#loader', { opacity: 0, duration: 1, pointerEvents: 'none' });
         gsap.to('#hero-content', { opacity: 1, duration: 1.5 });
+        gsap.from('.htag', { opacity: 0, y: 20, stagger: 0.1, duration: 1, delay: 0.5, ease: 'power4.out' });
       }
 
       animate() {
